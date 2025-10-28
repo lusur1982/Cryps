@@ -37,66 +37,99 @@ A comprehensive Next.js ecommerce platform for selling cryptocurrency mining har
 - npm or yarn
 - Git
 
-### Quick Setup (Recommended)
+### Quick Setup (PostgreSQL - Recommended)
+
+1. **Install PostgreSQL** (if not already installed)
+   - **Windows**: Download from https://www.postgresql.org/download/windows/
+   - **Mac**: `brew install postgresql` or download from https://www.postgresql.org/download/macosx/
+   - **Linux**: `sudo apt-get install postgresql postgresql-contrib` (Ubuntu/Debian)
+
+2. **Create database**
+   ```bash
+   # Connect to PostgreSQL
+   psql -U postgres
+   
+   # Create database
+   CREATE DATABASE cryps;
+   
+   # Create user (optional)
+   CREATE USER cryps_user WITH PASSWORD 'your_password';
+   GRANT ALL PRIVILEGES ON DATABASE cryps TO cryps_user;
+   \q
+   ```
+
+3. **Clone and setup the project**
+   ```bash
+   git clone https://github.com/lusur1982/Cryps.git
+   cd Cryps
+   npm install
+   ```
+
+4. **Configure environment**
+   ```bash
+   npm run setup-postgresql
+   ```
+
+5. **Edit .env file** with your PostgreSQL credentials:
+   ```env
+   DATABASE_URL="postgresql://username:password@localhost:5432/cryps"
+   ```
+
+6. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+### Quick Setup (SQLite - Simple Testing)
+
+If you prefer SQLite for simple testing:
 
 1. **Clone the repository**
-```bash
-git clone https://github.com/lusur1982/Cryps.git
-cd Cryps
-```
+   ```bash
+   git clone https://github.com/lusur1982/Cryps.git
+   cd Cryps
+   ```
 
 2. **Install dependencies**
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 3. **Automatic setup** (creates .env file and sets up database)
-```bash
-npm run setup
-```
+   ```bash
+   npm run setup
+   ```
 
-4. **Start development server**
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:3000`
-
-### Manual Setup
-
-If you prefer manual setup, follow these steps:
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/lusur1982/Cryps.git
-cd Cryps
-```
-
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Create environment file**
-```bash
-cp .env.example .env
-```
-
-4. **Database setup**
-```bash
-# Generate Prisma client
-npm run db:generate
-
-# Push database schema
-npm run db:push
-
-# Seed database with sample data
-npm run db:seed
-```
+4. **Edit .env file** to use SQLite:
+   ```env
+   DATABASE_URL="file:./db/custom.db"
+   ```
 
 5. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+### Platform-Specific Setup Scripts
+
+#### Windows Users
 ```bash
-npm run dev
+# For PostgreSQL
+setup-postgresql.bat
+
+# For SQLite
+setup.bat
+```
+
+#### Linux/Mac Users
+```bash
+# For PostgreSQL
+chmod +x setup-postgresql.sh
+./setup-postgresql.sh
+
+# For SQLite
+chmod +x setup.sh
+./setup.sh
 ```
 
 ### Default Login Credentials
@@ -107,15 +140,18 @@ After running the seed script, you can use these credentials:
 
 ## 🗄️ Database Management
 
-### SQLite (Development)
-- Location: `./dev.db`
-- Used for local development and testing
-- Automatic migrations with `npm run db:push`
+### PostgreSQL (Recommended for Production and Local Development)
+- **Connection**: Configure via `DATABASE_URL` in `.env`
+- **Format**: `postgresql://username:password@localhost:5432/cryps`
+- **Setup**: Use `npm run setup-postgresql` for automatic configuration
+- **Migrations**: Use `npm run db:migrate` for schema changes
+- **Advantages**: Better performance, concurrent connections, advanced features
 
-### PostgreSQL (Production)
-- Configure connection in `POSTGRES_DATABASE_URL`
-- Recommended for production deployments
-- Supports dual database synchronization
+### SQLite (Development and Simple Testing)
+- **Location**: `./db/custom.db`
+- **Used for**: Local development and simple testing
+- **Setup**: Use `npm run setup` for automatic configuration
+- **Advantages**: No installation required, portable, simple setup
 
 ### Database Schemas
 The application includes the following main models:
@@ -125,6 +161,31 @@ The application includes the following main models:
 - **CartItems**: Shopping cart functionality
 - **Blogs**: Content management system
 - **Settings**: Site configuration
+
+### Switching Between Databases
+To switch between SQLite and PostgreSQL:
+
+1. **Edit .env file**:
+   ```env
+   # For PostgreSQL
+   DATABASE_URL="postgresql://username:password@localhost:5432/cryps"
+   
+   # For SQLite
+   DATABASE_URL="file:./db/custom.db"
+   ```
+
+2. **Update prisma/schema.prisma**:
+   ```prisma
+   datasource db {
+     provider = "postgresql"  # or "sqlite"
+     url      = env("DATABASE_URL")
+   }
+   ```
+
+3. **Run database setup**:
+   ```bash
+   npm run db:setup
+   ```
 
 ## 🏗️ Project Structure
 
@@ -263,23 +324,28 @@ src/
 
 ```bash
 # Quick Setup
-npm run setup         # Install .env and setup database
+npm run setup               # Install .env and setup database (SQLite)
+npm run setup-postgresql    # Install .env and setup database (PostgreSQL)
 
 # Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
+npm run dev                # Start development server
+npm run build              # Build for production
+npm run start              # Start production server
 
 # Database
-npm run db:setup     # Generate, push and seed database
-npm run db:generate  # Generate Prisma client
-npm run db:push      # Push schema to database
-npm run db:migrate   # Run database migrations
-npm run db:seed      # Seed database with data
-npm run db:reset     # Reset database
+npm run db:setup           # Generate, push and seed database
+npm run db:generate        # Generate Prisma client
+npm run db:push            # Push schema to database
+npm run db:migrate         # Run database migrations
+npm run db:seed            # Seed database with data
+npm run db:reset           # Reset database
+
+# Environment Setup
+npm run setup-env          # Create .env from template (SQLite)
+npm run setup-env-postgresql # Create .env from template (PostgreSQL)
 
 # Code Quality
-npm run lint         # Run ESLint
+npm run lint               # Run ESLint
 ```
 
 ## 🌍 Deployment
