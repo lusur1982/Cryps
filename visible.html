@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRYPS TEST</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #ff0000;
+            color: #ffffff;
+            font-family: Arial Black, sans-serif;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .huge-text {
+            font-size: 120px;
+            margin-bottom: 30px;
+            text-shadow: 5px 5px 10px #000;
+            animation: pulse 2s infinite;
+        }
+        
+        .medium-text {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: #ffff00;
+            color: #000000;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .info {
+            font-size: 24px;
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .time {
+            font-size: 36px;
+            color: #00ff00;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="huge-text">CRYPS</div>
+    <div class="medium-text">KRYPTO ŤAŽBA</div>
+    <div class="time" id="time"></div>
+    <div class="info">
+        🟢 SERVER BEŽÍ NA PORTE 3001<br>
+        🌐 IP: 21.0.9.59<br>
+        ⏰ ČAS: <span id="time2"></span>
+    </div>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString();
+            document.getElementById('time2').textContent = now.toLocaleTimeString();
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        console.log('🚀🚀🚀 CRYPS TEST STRÁNKA NAČÍTANÁ! 🚀🚀🚀');
+        console.log('🔴 ČERVENÉ POZADIE - MALO BY BYŤ VIDIEŤ');
+        console.log('📍 Port: 3001');
+        console.log('🌐 IP: 21.0.9.59');
+        
+        // Blikanie pozadia
+        setInterval(() => {
+            document.body.style.background = document.body.style.background === '#ff0000' ? '#00ff00' : '#ff0000';
+        }, 3000);
+    </script>
+</body>
+</html>

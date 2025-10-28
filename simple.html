@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TEST</title>
+</head>
+<body style="background: yellow; color: red; font-size: 72px; text-align: center; padding: 50px;">
+    <h1>CRYPS JE TU!</h1>
+    <p style="font-size: 48px;">Ak vidíte toto, funguje to!</p>
+    <div style="font-size: 36px; color: blue;">
+        Čas: <span id="time"></span>
+    </div>
+    <script>
+        document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
+        setInterval(() => {
+            document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
+        }, 1000);
+    </script>
+</body>
+</html>

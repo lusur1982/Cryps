@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRYPS - FAQ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .huge-title {
+            font-size: 80px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: bounce 2s infinite;
+        }
+        
+        .success-box {
+            background: rgba(0,0,0,0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 5px solid #00ff00;
+            margin-bottom: 30px;
+        }
+        
+        .success-text {
+            font-size: 36px;
+            color: #00ff00;
+            margin-bottom: 20px;
+        }
+        
+        .info {
+            font-size: 20px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: #00ff00;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #ffff00;
+            transform: scale(1.1);
+        }
+        
+        .time {
+            font-size: 24px;
+            color: #ffff00;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="huge-title">🎉 CRYPS FAQ 🎉</div>
+        
+        <div class="success-box">
+            <div class="success-text">✅ SERVER FUNGUJE!</div>
+            <div style="font-size: 24px;">
+                Už ste na správnej stránke!
+            </div>
+        </div>
+        
+        <div class="info">
+            <strong>🌐 Replit Preview:</strong> Funguje perfektne!<br>
+            <strong>📍 Port:</strong> 3000 (automaticky)<br>
+            <strong>⏰ Čas:</strong> <span id="time"></span>
+        </div>
+        
+        <div class="time" id="time2"></div>
+        
+        <div class="nav-buttons">
+            <a href="/" class="nav-btn">🏠 Hlavná stránka</a>
+            <a href="/visible.html" class="nav-btn">🔴 Viditeľná verzia</a>
+            <a href="/simple.html" class="nav-btn">💛 Jednoduchá verzia</a>
+        </div>
+    </div>
+    
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            document.getElementById('time').textContent = timeStr;
+            document.getElementById('time2').textContent = timeStr;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        console.log('🎉🎉🎉 CRYPS FAQ STRÁNKA NAČÍTANÁ! 🎉🎉🎉');
+        console.log('✅ Replit preview funguje!');
+        console.log('🌐 Port: 3000');
+        console.log('⏰ Čas:', new Date().toLocaleString());
+        
+        // Zmena farieb pozadia
+        const colors = [
+            'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+            'linear-gradient(45deg, #4ecdc4, #45b7d1)',
+            'linear-gradient(45deg, #45b7d1, #96ceb4)',
+            'linear-gradient(45deg, #96ceb4, #ffeaa7)',
+            'linear-gradient(45deg, #ffeaa7, #ff6b6b)'
+        ];
+        
+        let colorIndex = 0;
+        setInterval(() => {
+            colorIndex = (colorIndex + 1) % colors.length;
+            document.body.style.background = colors[colorIndex];
+        }, 3000);
+    </script>
+</body>
+</html>

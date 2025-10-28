@@ -61,9 +61,12 @@ export function Navigation() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Link href="/" className="flex items-center space-x-2">
-            <Icons.logo className="h-6 w-6" />
-            <span className="font-bold text-xl">Cryps</span>
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative">
+              <Icons.logo className="h-8 w-8 text-blue-600 group-hover:scale-110 transition-transform" />
+              <div className="absolute -inset-1 bg-blue-600/20 rounded-full blur-sm group-hover:bg-blue-600/30 transition-colors"></div>
+            </div>
+            <span className="font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">CRYPS</span>
           </Link>
 
           {/* Desktop Navigation */}

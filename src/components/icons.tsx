@@ -93,8 +93,34 @@ const GoogleIcon = (props: LucideProps) => (
   </svg>
 )
 
+// Custom Crypto Logo SVG
+const CryptoLogo = (props: LucideProps) => (
+  <svg
+    {...props}
+    width="24"
+    height="24"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{stopColor:'#3B82F6', stopOpacity:1}} />
+        <stop offset="100%" style={{stopColor:'#1E40AF', stopOpacity:1}} />
+      </linearGradient>
+    </defs>
+    <circle cx="16" cy="16" r="15" fill="url(#gradient)" stroke="#1E40AF" strokeWidth="1"/>
+    <path d="M8 12C8 10.8954 8.89543 10 10 10H22C23.1046 10 24 10.8954 24 12V20C24 21.1046 23.1046 22 22 22H10C8.89543 22 8 21.1046 8 20V12Z" fill="white" opacity="0.9"/>
+    <path d="M12 14H20V16H18V18H16V16H14V18H12V14Z" fill="#1E40AF"/>
+    <circle cx="13" cy="13" r="1" fill="#10B981"/>
+    <circle cx="19" cy="13" r="1" fill="#10B981"/>
+    <circle cx="13" cy="19" r="1" fill="#10B981"/>
+    <circle cx="19" cy="19" r="1" fill="#10B981"/>
+  </svg>
+)
+
 export const Icons = {
-  logo: Server,
+  logo: CryptoLogo,
   sun: Sun,
   moon: Moon,
   menu: Menu,
