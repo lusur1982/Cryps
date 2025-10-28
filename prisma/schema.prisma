@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// This is your Prisma schema file for Cryps Ecommerce Platform
+// Supporting dual database: SQLite (local) and PostgreSQL (production)
 
 generator client {
   provider = "prisma-client-js"
@@ -13,20 +10,259 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User model with authentication support
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(cuid())
+  email         String   @unique
+  username      String   @unique
+  password      String?
+  name          String?
+  role          UserRole @default(USER)
+  emailVerified DateTime?
+  image         String?
+  phone         String?
+  address       String?
+  city          String?
+  country       String?
+  postalCode    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  orders        Order[]
+  cartItems     CartItem[]
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("users")
 }
 
-model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  authorId  String
+// NextAuth models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Product model for crypto miners
+model Product {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String
+  price       Float
+  originalPrice Float?
+  images      String? // JSON string array of image URLs
+  category    ProductCategory
+  cooling     CoolingType
+  type        MinerType
+  hashRate    String?      // e.g., "110 TH/s"
+  powerConsumption String?  // e.g., "3250W"
+  efficiency  String?      // e.g., "29.5 J/TH"
+  algorithm   String?      // e.g., "SHA-256"
+  brand       String?
+  model       String?
+  weight      Float?       // in kg
+  dimensions  String?      // e.g., "130 x 220 x 360mm"
+  inStock     Boolean      @default(true)
+  stockCount  Int          @default(0)
+  featured    Boolean      @default(false)
+  isNew       Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  reviews     Review[]
+
+  @@map("products")
+}
+
+// Order model
+model Order {
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  userId        String?
+  status        OrderStatus @default(PENDING)
+  subtotal      Float
+  tax           Float       @default(0)
+  shipping      Float       @default(0)
+  total         Float
+  currency      String      @default("USD")
+  paymentMethod String?
+  paymentStatus PaymentStatus @default(PENDING)
+  paymentId     String?
+  shippingAddress Json?      // JSON object for shipping address
+  billingAddress  Json?      // JSON object for billing address
+  notes         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Relations
+  user          User?       @relation(fields: [userId], references: [id])
+  orderItems    OrderItem[]
+
+  @@map("orders")
+}
+
+// Order items
+model OrderItem {
+  id        String @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float // Price at time of purchase
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+// Cart model
+model CartItem {
+  id        String @id @default(cuid())
+  userId    String?
+  productId String
+  quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relations
+  user    User?   @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
+  @@map("cart_items")
+}
+
+// Product reviews
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  userId    String?
+  rating    Int      // 1-5 stars
+  title     String?
+  content   String?
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+// Blog/Content model
+model Blog {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  content     String     // Rich text content
+  excerpt     String?
+  featuredImage String?
+  status      PostStatus @default(DRAFT)
+  category    String?
+  tags        String?   // JSON string array
+  seoTitle    String?
+  seoDescription String?
+  publishedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("blogs")
+}
+
+// Settings model for site configuration
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json   // JSON value for flexible configuration
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// Enums
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum ProductCategory {
+  BITCOIN_MINER
+  ETHEREUM_MINER
+  LITECOIN_MINER
+  MONERO_MINER
+  OTHER
+}
+
+enum CoolingType {
+  AIR_COOLING
+  LIQUID_COOLING
+  HYBRID
+}
+
+enum MinerType {
+  ASIC
+  GPU
+  FPGA
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }

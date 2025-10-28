@@ -1,13 +1,15 @@
+import { HeroSection } from "@/components/sections/hero-section"
+import { FeaturedProducts } from "@/components/sections/featured-products"
+import { NewProducts } from "@/components/sections/new-products"
+import { WhyChooseUs } from "@/components/sections/why-choose-us"
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-4">
-      <div className="relative w-24 h-24 md:w-32 md:h-32">
-        <img
-          src="/logo.svg"
-          alt="Z.ai Logo"
-          className="w-full h-full object-contain"
-        />
-      </div>
-    </div>
+    <>
+      <HeroSection />
+      <FeaturedProducts />
+      <NewProducts />
+      <WhyChooseUs />
+    </>
   )
 }

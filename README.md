@@ -1,141 +1,360 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+# Cryps - Premium Crypto Mining Hardware Ecommerce Platform
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+A comprehensive Next.js ecommerce platform for selling cryptocurrency mining hardware with advanced features including dual database support, user authentication, admin dashboard, and more.
 
-## ✨ Technology Stack
+## 🚀 Features
 
-This scaffold provides a robust foundation built with:
+### Core Features
+- **Modern Tech Stack**: Next.js 15, TypeScript, Tailwind CSS, Prisma ORM
+- **Dual Database Support**: SQLite for development, PostgreSQL for production
+- **Authentication**: NextAuth.js with Google OAuth and custom login
+- **Role-Based Access**: User and Admin roles with separate dashboards
+- **Shopping Cart & Checkout**: Full ecommerce functionality with PayPal/Revolut integration
+- **Product Management**: Advanced filtering, search, and categorization
+- **Order Management**: Complete order lifecycle tracking
+- **Profitability Calculator**: Interactive mining profitability analysis
 
-### 🎯 Core Framework
-- **⚡ Next.js 15** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+### Frontend Features
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Dark/Light Mode**: Theme switching with next-themes
+- **SEO Optimized**: Dynamic meta tags and structured data
+- **Image Optimization**: Next.js Image component with Unsplash integration
+- **Interactive Components**: Built with shadcn/ui component library
+- **Real-time Updates**: Socket.io integration for live features
 
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
+### Backend Features
+- **API Routes**: RESTful API with proper error handling
+- **Database ORM**: Prisma with type-safe database access
+- **Authentication**: Secure session management with NextAuth
+- **File Uploads**: Image handling and optimization
+- **Email Integration**: Nodemailer for transactional emails
+- **Caching**: In-memory caching for performance optimization
 
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
+## 📦 Installation
 
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Axios** - Promise-based HTTP client
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Git
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
+### Setup Instructions
 
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
-
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
-
-## 🎯 Why This Scaffold?
-
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
-
-## 🚀 Quick Start
-
+1. **Clone the repository**
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
+git clone https://github.com/lusur1982/Cryps.git
+cd Cryps
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-## 🤖 Powered by Z.ai
+3. **Environment variables**
+Create a `.env.local` file in the root directory:
 
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
+```env
+# Database
+DATABASE_URL="file:./dev.db"
+POSTGRES_DATABASE_URL="postgresql://username:password@localhost:5432/cryps"
 
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key-here"
 
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
+# Google OAuth (optional)
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
 
-## 📁 Project Structure
+# Email (optional)
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="587"
+SMTP_USER="your-email@gmail.com"
+SMTP_PASS="your-app-password"
+
+# Payment (optional)
+PAYPAL_CLIENT_ID="your-paypal-client-id"
+PAYPAL_CLIENT_SECRET="your-paypal-client-secret"
+REVOLUT_API_KEY="your-revolut-api-key"
+```
+
+4. **Database setup**
+```bash
+# Generate Prisma client
+npm run db:generate
+
+# Push database schema
+npm run db:push
+
+# Seed database with sample data
+npm run db:seed
+```
+
+5. **Start development server**
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`
+
+## 🗄️ Database Management
+
+### SQLite (Development)
+- Location: `./dev.db`
+- Used for local development and testing
+- Automatic migrations with `npm run db:push`
+
+### PostgreSQL (Production)
+- Configure connection in `POSTGRES_DATABASE_URL`
+- Recommended for production deployments
+- Supports dual database synchronization
+
+### Database Schemas
+The application includes the following main models:
+- **Users**: Authentication and profile management
+- **Products**: Crypto miner inventory with specifications
+- **Orders**: Order management and tracking
+- **CartItems**: Shopping cart functionality
+- **Blogs**: Content management system
+- **Settings**: Site configuration
+
+## 🏗️ Project Structure
 
 ```
 src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
+├── app/                    # Next.js App Router
+│   ├── (auth)/            # Authentication pages
+│   ├── admin/             # Admin dashboard
+│   ├── api/               # API routes
+│   ├── profile/           # User profile
+│   ├── shop/              # Product pages
+│   └── globals.css        # Global styles
+├── components/            # React components
+│   ├── ui/                # shadcn/ui components
+│   ├── admin/             # Admin components
+│   ├── dashboard/         # Dashboard components
+│   ├── pages/             # Page components
+│   ├── sections/          # Landing page sections
+│   └── shop/              # Shop components
+├── lib/                   # Utility libraries
+│   ├── auth.ts            # NextAuth configuration
+│   ├── db.ts              # Database client
+│   ├── cache.ts           # Caching utilities
+│   └── utils.ts           # Helper functions
+├── store/                 # State management
+│   └── cart.ts            # Shopping cart store
+├── types/                 # TypeScript definitions
+└── hooks/                 # Custom React hooks
 ```
 
-## 🎨 Available Features & Components
+## 🎯 Core Pages
 
-This scaffold includes a comprehensive set of modern web development tools:
+### Public Pages
+- **Home** (`/`): Hero section, featured products, company overview
+- **Shop** (`/shop`): Product catalog with advanced filtering
+- **Product Detail** (`/shop/[slug]`): Individual product pages
+- **Cart** (`/cart`): Shopping cart management
+- **Checkout** (`/checkout`): Order processing and payment
+- **Profitability** (`/profitability`): Mining calculator
+- **About** (`/about`): Company information and team
+- **FAQ** (`/faq`): Frequently asked questions
+- **Contact** (`/contact`): Contact form and information
 
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
+### User Pages
+- **Profile** (`/profile`): User dashboard and order history
+- **Authentication** (`/auth/*`): Login, registration, password reset
 
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
+### Admin Pages
+- **Admin Dashboard** (`/admin`): Product, order, and user management
+- **Settings**: Payment and shipping configuration
 
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
+## 🔐 Authentication
 
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Axios + TanStack Query
-- **State Management**: Simple and scalable with Zustand
+### User Roles
+- **USER**: Standard customer access
+- **ADMIN**: Full administrative privileges
 
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
+### Login Methods
+- **Email/Username**: Traditional credentials
+- **Google OAuth**: Social login integration
+- **Separate Admin Login**: Dedicated admin authentication
 
-## 🤝 Get Started with Z.ai
+### Session Management
+- Secure JWT tokens
+- Automatic session refresh
+- Role-based access control
 
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+## 🛒 Ecommerce Features
+
+### Product Management
+- **Categories**: Bitcoin, Ethereum, Litecoin, Monero miners
+- **Specifications**: Hash rate, power consumption, efficiency
+- **Inventory**: Stock tracking and management
+- **Pricing**: Dynamic pricing with discount support
+
+### Shopping Cart
+- **Persistent Cart**: Saved across sessions
+- **Real-time Updates**: Live cart modifications
+- **Quantity Management**: Stock validation
+- **Price Calculation**: Automatic totals with tax/shipping
+
+### Checkout Process
+- **Multi-step Form**: Contact, shipping, billing information
+- **Payment Integration**: PayPal and Revolut support
+- **Order Confirmation**: Email notifications and tracking
+- **Guest Checkout**: Option for non-registered users
+
+## 📊 Admin Dashboard
+
+### Overview
+- **Statistics**: Products, orders, users, revenue metrics
+- **Real-time Data**: Live dashboard updates
+- **Visual Charts**: Revenue and order trends
+
+### Management Tools
+- **Products**: CRUD operations for inventory
+- **Orders**: Status updates and fulfillment
+- **Users**: Customer management and roles
+- **Settings**: Payment and shipping configuration
+
+### Features
+- **Bulk Operations**: Mass updates and exports
+- **Search & Filter**: Advanced data filtering
+- **Export Options**: CSV and PDF reports
+- **Activity Logs**: Admin action tracking
+
+## 🎨 Design System
+
+### UI Components
+- **shadcn/ui**: Modern component library
+- **Tailwind CSS**: Utility-first styling
+- **Lucide Icons**: Consistent iconography
+- **Dark Mode**: Automatic theme detection
+
+### Responsive Design
+- **Mobile-First**: Progressive enhancement
+- **Breakpoints**: sm, md, lg, xl screen support
+- **Touch-Friendly**: 44px minimum touch targets
+- **Accessibility**: WCAG compliance
+
+## 🚀 Performance Optimizations
+
+### Caching Strategy
+- **Memory Cache**: In-memory data caching
+- **Image Optimization**: Next.js Image component
+- **Bundle Splitting**: Automatic code splitting
+- **Static Generation**: ISR for dynamic content
+
+### SEO Features
+- **Meta Tags**: Dynamic page metadata
+- **Structured Data**: JSON-LD markup
+- **Sitemap**: Automatic sitemap generation
+- **Robots.txt**: Search engine directives
+
+## 🔧 Development Commands
+
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+
+# Database
+npm run db:generate  # Generate Prisma client
+npm run db:push      # Push schema to database
+npm run db:migrate   # Run database migrations
+npm run db:seed      # Seed database with data
+npm run db:reset     # Reset database
+
+# Code Quality
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript validation
+```
+
+## 🌍 Deployment
+
+### Environment Setup
+1. **Production Database**: Configure PostgreSQL
+2. **Environment Variables**: Set all required env vars
+3. **Build Process**: `npm run build`
+4. **Start Server**: `npm run start`
+
+### Deployment Options
+- **Vercel**: Recommended for Next.js applications
+- **Netlify**: Static hosting with serverless functions
+- **Docker**: Containerized deployment
+- **VPS**: Custom server deployment
+
+## 📝 API Documentation
+
+### Authentication Endpoints
+- `GET/POST /api/auth/[...nextauth]` - NextAuth.js handler
+
+### Product Endpoints
+- `GET /api/products` - List products with filtering
+- `POST /api/admin/products` - Create product (admin)
+- `PUT /api/admin/products/[id]` - Update product (admin)
+- `DELETE /api/admin/products/[id]` - Delete product (admin)
+
+### Order Endpoints
+- `GET /api/orders` - Get user orders
+- `POST /api/orders` - Create new order
+- `GET /api/admin/orders` - List all orders (admin)
+- `PATCH /api/admin/orders/[id]` - Update order status (admin)
+
+### User Endpoints
+- `GET /api/user/profile` - Get user profile
+- `PUT /api/user/profile` - Update user profile
+- `GET /api/admin/users` - List all users (admin)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support and questions:
+- **Email**: support@cryps.com
+- **Documentation**: Check this README and inline code comments
+- **Issues**: Create an issue on GitHub
+- **Discussions**: Use GitHub Discussions for questions
+
+## 🔄 Database Sync
+
+The application supports dual database synchronization:
+
+```bash
+# Sync SQLite to PostgreSQL
+npm run db:sync
+```
+
+This feature ensures data consistency between development and production databases.
+
+## 🧪 Testing
+
+```bash
+# Run tests (when implemented)
+npm run test
+npm run test:watch
+npm run test:coverage
+```
+
+## 📈 Monitoring
+
+Consider implementing:
+- **Analytics**: Google Analytics or Plausible
+- **Error Tracking**: Sentry or similar
+- **Performance**: Vercel Analytics or custom monitoring
+- **Uptime**: Status page monitoring
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+Built with ❤️ using Next.js, TypeScript, and modern web technologies.
