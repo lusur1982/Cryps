@@ -37,7 +37,7 @@ A comprehensive Next.js ecommerce platform for selling cryptocurrency mining har
 - npm or yarn
 - Git
 
-### Setup Instructions
+### Quick Setup (Recommended)
 
 1. **Clone the repository**
 ```bash
@@ -50,32 +50,36 @@ cd Cryps
 npm install
 ```
 
-3. **Environment variables**
-Create a `.env.local` file in the root directory:
+3. **Automatic setup** (creates .env file and sets up database)
+```bash
+npm run setup
+```
 
-```env
-# Database
-DATABASE_URL="file:./dev.db"
-POSTGRES_DATABASE_URL="postgresql://username:password@localhost:5432/cryps"
+4. **Start development server**
+```bash
+npm run dev
+```
 
-# NextAuth
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key-here"
+The application will be available at `http://localhost:3000`
 
-# Google OAuth (optional)
-GOOGLE_CLIENT_ID="your-google-client-id"
-GOOGLE_CLIENT_SECRET="your-google-client-secret"
+### Manual Setup
 
-# Email (optional)
-SMTP_HOST="smtp.gmail.com"
-SMTP_PORT="587"
-SMTP_USER="your-email@gmail.com"
-SMTP_PASS="your-app-password"
+If you prefer manual setup, follow these steps:
 
-# Payment (optional)
-PAYPAL_CLIENT_ID="your-paypal-client-id"
-PAYPAL_CLIENT_SECRET="your-paypal-client-secret"
-REVOLUT_API_KEY="your-revolut-api-key"
+1. **Clone the repository**
+```bash
+git clone https://github.com/lusur1982/Cryps.git
+cd Cryps
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Create environment file**
+```bash
+cp .env.example .env
 ```
 
 4. **Database setup**
@@ -95,7 +99,11 @@ npm run db:seed
 npm run dev
 ```
 
-The application will be available at `http://localhost:3000`
+### Default Login Credentials
+After running the seed script, you can use these credentials:
+
+- **Admin**: `admin@cryps.com` / `admin123`
+- **User**: `user@cryps.com` / `user123`
 
 ## 🗄️ Database Management
 
@@ -254,12 +262,16 @@ src/
 ## 🔧 Development Commands
 
 ```bash
+# Quick Setup
+npm run setup         # Install .env and setup database
+
 # Development
 npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 
 # Database
+npm run db:setup     # Generate, push and seed database
 npm run db:generate  # Generate Prisma client
 npm run db:push      # Push schema to database
 npm run db:migrate   # Run database migrations
@@ -268,7 +280,6 @@ npm run db:reset     # Reset database
 
 # Code Quality
 npm run lint         # Run ESLint
-npm run type-check   # TypeScript validation
 ```
 
 ## 🌍 Deployment
