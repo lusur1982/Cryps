@@ -23,7 +23,7 @@ if (process.env.POSTGRES_DATABASE_URL) {
 }
 
 // Main database client - uses SQLite by default, PostgreSQL when available
-export const db = postgresClient || sqliteClient
+export const db = sqliteClient
 
 // Export both clients for specific operations
 export { sqliteClient, postgresClient }
